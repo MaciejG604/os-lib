@@ -34,5 +34,15 @@ object OpTests extends TestSuite {
         os.remove(os.pwd / "out" / "scratch" / "nonexistent", checkExists = true)
       }
     }
+    test("pwd when home is not available") {
+      val correctPwd = java.nio.file.Paths.get(".").toAbsolutePath
+      val oldUserHome = System.getProperty("user.home")
+      System.setProperty("user.home", "?")
+      try {
+        assert(os.pwd == os.Path(correctPwd))
+      } finally {
+        System.setProperty("user.home", oldUserHome)
+      }
+    }
   }
 }
