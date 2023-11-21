@@ -26,7 +26,7 @@ package object os {
   /**
    * The user's home directory
    */
-  val home: Path = Path(System.getProperty("user.home"))
+  lazy val home: Path = Path(System.getProperty("user.home"))
 
   /**
    * The current working directory for this process.
